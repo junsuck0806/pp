@@ -1,0 +1,9 @@
+def load_seen():
+    if os.path.exists(STATE_FILE):
+        with open(STATE_FILE, encoding="utf-8") as f:
+            return json.load(f)
+    return None  # 첫 실행
+
+def save_seen(seen_list):
+    with open(STATE_FILE, "w", encoding="utf-8") as f:
+        json.dump(seen_list[-MAX_SEEN:], f, ensure_ascii=False, indent=2)
