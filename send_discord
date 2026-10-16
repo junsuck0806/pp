@@ -1,0 +1,6 @@
+def send_discord(n):
+    source = f" ({n['source']})" if n["source"] else ""
+    content = f"📰 **[{n['keyword']}]** {n['title']}{source}\n{n['link']}"
+    res = requests.post(WEBHOOK, json={"content": content[:1900]}, timeout=15)
+    res.raise_for_status()
+    time.sleep(1)
