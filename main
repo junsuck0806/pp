@@ -1,0 +1,5 @@
+def main():
+    seen = load_seen()
+    first_run = seen is None
+    seen_list = [] if first_run else seen
+    seen_set = set(seen_list)
