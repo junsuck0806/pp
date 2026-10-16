@@ -1,0 +1,15 @@
+def fetch_news(keyword: str):
+    res = requests.get(build_url(keyword), timeout=15,
+                       headers={"User-Agent": "Mozilla/5.0"})
+    res.raise_for_status()
+    root = ET.fromstring(res.content)
+
+    items = []
+    for item in root.iter("item"):
+        title = (item.findtext("title") or "").strip()
+        link = (item.findtext("link") or "").strip()
+        source = (item.findtext("source") or "").strip()
+        if title and link:
+            items.append({"title": title, "link": link,
+                          "source": source, "keyword": keyword})
+    return items
